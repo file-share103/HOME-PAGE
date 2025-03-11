@@ -1,0 +1,462 @@
+/* Enhanced Dark Mode Theme */
+:root {
+    --bg-color: #121212;
+    --bg-gradient-1: #1a1a2e;
+    --bg-gradient-2: #16213e;
+    --text-color: #f0f0f0;
+    --accent-color: #bb86fc;
+    --accent-color-hover: #d0a7ff;
+    --secondary-color: #03dac6;
+    --secondary-color-hover: #04f7e0;
+    --surface-color: rgba(30, 30, 30, 0.8);
+    --surface-color-light: rgba(45, 45, 45, 0.8);
+    --error-color: #cf6679;
+    --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --button-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --button-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-image: url('Assets/test.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: var(--text-color);
+    line-height: 1.6;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+    overscroll-behavior: none; /* Prevent bounce effect on some mobile browsers */
+    min-height: 100vh;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Black overlay with 60% opacity */
+    backdrop-filter: blur(8px); /* Apply blur effect */
+    z-index: -1; /* Place behind the content */
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-x: hidden; /* Prevent horizontal scrolling on mobile */
+}
+
+/* Image Slider Styles */
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Reduced height */
+    overflow: hidden;
+    margin-bottom: 30px;
+    border-radius: 0; /* Removed border radius for edge-to-edge */
+    box-shadow: none; /* Removed shadow */
+    border: none; /* Removed border */
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background-color: var(--accent-color);
+    color: #000;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+/* Slider Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    padding: 8px 16px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dot.active {
+    background-color: var(--accent-color);
+    transform: scale(1.2);
+    box-shadow: 0 0 8px var(--accent-color);
+}
+
+.dot:hover {
+    background-color: var(--accent-color-hover);
+    transform: scale(1.1);
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto;
+    width: 180px;
+    background-color: var(--surface-color); /* Transparent card background */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgb(13, 0, 255); /* Subtle border with accent color */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-buttons:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(242, 3, 3, 0.159);
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    margin-bottom: 15px; /* Space between buttons */
+    background-color: var(--surface-color-light);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 8px; /* Slightly more rounded for better mobile appearance */
+    transition: all 0.3s ease;
+    border: 1px solid var(--accent-color);
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    height: 50px;
+    width: 100%; /* Full width of the container */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+    user-select: none; /* Prevent text selection on mobile */
+    position: relative;
+    overflow: hidden; /* For the ripple effect */
+    box-shadow: var(--button-shadow);
+    letter-spacing: 0.5px;
+}
+
+/* Remove margin from the last button */
+.nav-btn:last-child {
+    margin-bottom: 0;
+}
+
+.nav-btn:hover, .nav-btn:active {
+    background-color: var(--accent-color);
+    color: #000;
+    transform: translateX(5px); /* Slide right effect instead of down */
+    box-shadow: var(--button-shadow-hover);
+}
+
+/* Add active state for touch devices */
+.nav-btn:active {
+    transform: translateX(5px) scale(0.98);
+    box-shadow: 0 0 12px rgba(134, 142, 252, 0.7);
+}
+
+/* Add a subtle glow effect to buttons */
+.nav-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.068), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.nav-btn:hover::after {
+    transform: translateX(100%);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(-30px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Apply animations */
+.slider-container {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.nav-buttons {
+    animation: fadeIn 1s ease-out 0.3s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.nav-btn {
+    animation: slideInRight 0.5s ease-out forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.nav-btn:nth-child(1) { animation-delay: 0.5s; }
+.nav-btn:nth-child(2) { animation-delay: 0.7s; }
+.nav-btn:nth-child(3) { animation-delay: 0.9s; }
+
+/* Navigation buttons are now the main content element */
+
+/* Login Button */
+.login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.login-btn {
+    padding: 12px 30px;
+    background-color: var(--secondary-color);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--button-shadow);
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-btn:hover {
+    background-color: var(--secondary-color-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--button-shadow-hover);
+}
+
+.login-btn:active {
+    transform: translateY(-1px);
+}
+
+.login-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.login-btn:hover::after {
+    transform: translateX(100%);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1s ease-out 1.2s forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* Responsive Design */
+@media (min-width: 1200px) {
+    /* Enhanced styles for large desktop screens */
+    .container {
+        max-width: 1400px;
+        padding: 30px;
+    }
+
+    .slider-container {
+        height: 400px; /* Taller on large screens but still reduced */
+        margin-bottom: 40px;
+    }
+
+    .nav-buttons {
+        width: 220px;
+    }
+
+    .nav-btn {
+        height: 60px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .nav-buttons {
+        width: 90%;
+        max-width: 300px;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .slider-container {
+        height: 250px; /* Further reduced for tablets */
+        margin-bottom: 20px;
+    }
+
+    .prev-btn, .next-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    /* Improve button spacing on tablets */
+    .nav-btn {
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .nav-buttons {
+        width: 85%;
+        padding: 15px;
+    }
+
+    .nav-btn {
+        margin-bottom: 12px;
+        height: 45px;
+    }
+
+    .slider-container {
+        height: 200px; /* Even smaller for mobile */
+        border-radius: 0;
+    }
+
+    .slider-dots {
+        bottom: 10px;
+        padding: 6px 12px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .prev-btn, .next-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#121212">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Dark Mode Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Image Slider (Edge to Edge) -->
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide active">
+                <img src="Assets/01.png" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="Assets/02.jpg" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="Assets/03.jpg" alt="Slide 3">
+            </div>
+        </div>
+        <button class="prev-btn" aria-label="Previous slide">&#10094;</button>
+        <button class="next-btn" aria-label="Next slide">&#10095;</button>
+        <div class="slider-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <a href="https://www.example.com" class="nav-btn">ARMS</a>
+            <a href="https://www.example.org" class="nav-btn">MCQ's</a>
+            <a href="https://www.example.net" class="nav-btn">COMMANDS</a>
+        </div>
+
+        <!-- Login Button -->
+        <div class="login-container">
+            <button class="login-btn">Login</button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2023 UP Police. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
